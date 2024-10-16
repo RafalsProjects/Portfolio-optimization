@@ -1,0 +1,6 @@
+API keys.txt
+*.csv
+*.xlsx
+*.png
+/Sharpe's Model/Sharpe v*
+/Sharpe's Model/Sharpe.py
