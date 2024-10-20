@@ -37,7 +37,7 @@ def fetch_data(assets, start_date, end_date):
     return returns
 
 # Funkcja do optymalizacji portfela
-def optimize_portfolio(assets, start_date, end_date, num_portfolios=10000, risk_free_rate=0):
+def optimize_portfolio(assets, start_date, end_date, num_portfolios=50000, risk_free_rate=0):
     returns = fetch_data(assets, start_date, end_date)
 
     if returns.empty:
@@ -72,11 +72,12 @@ def optimize_portfolio(assets, start_date, end_date, num_portfolios=10000, risk_
 # assets = ['ACX22620-USD', 'BANANA28066-USD']
 # assets = ['PAAL-USD', 'BTC-USD']
 assets = ['BTC-USD', 'MUBI-USD', 'ORDI-USD', '1000SATS-USD', 'SOV-USD', 'SAVM-USD', 'TRAC25208-USD', 'DOG30933-USD', 'ORNJ-USD']
+# assets = ['TON11419-USD', 'DOGS32698-USD', 'NOT-USD']
 end_date = datetime.now().strftime('%Y-%m-%d')
 
 # Okresy do analizy (w dniach)
 # periods = [3, 7, 30, 90]  # 3 dni, 7 dni, 30 dni, 90 dni
-periods = [7]
+periods = [30]
 results_all_periods = {}
 
 for period in periods:
@@ -103,26 +104,29 @@ for period, (results, weights_record) in results_all_periods.items():
     days_label = 'dzień' if period == 1 else 'dni'
     print(f'\n=== Wyniki dla okresu {period} {days_label} ===')
 
-    # Wyświetlenie portfela z najlepszym wskaźnikiem Sharpe'a
-    #print(f'\nPortfel z najlepszym wskaźnikiem Sharpe\'a:')
-    #print(f'Roczny zwrot: {max_sharpe_portfolio[0]:.4f}')
-    #print(f'Zmienność: {max_sharpe_portfolio[1]:.4f}')
-    #print('Wagi portfela:')
-    #max_sharpe_weights = weights_record[max_sharpe_index]
-    #for ticker, weight in zip(assets, max_sharpe_weights):
-    #    print(f'{ticker}: {weight:.2%}')
+    #Wyświetlenie portfela z najlepszym wskaźnikiem Sharpe'a
+    print(f'\nPortfel z najlepszym wskaźnikiem Sharpe\'a:')
+    print(f'Roczny zwrot: {max_sharpe_portfolio[0]:.4f}')
+    print(f'Zmienność: {max_sharpe_portfolio[1]:.4f}')
+    print('Wagi portfela:')
+    max_sharpe_weights = weights_record[max_sharpe_index]
+    for ticker, weight in zip(assets, max_sharpe_weights):
+        print(f'{ticker}: {weight:.2%}')
 
     # Wyświetlenie najlepszych portfeli
     print(f'\nNajlepsze {top_n} portfeli według modelu Sharpe"a (zwrot/zmienność):')
     for i in range(top_n):
-        idx = sorted_indices[i]
-        weights = weights_record[idx]
-        print(f'\nPortfel {i + 1}:')
-        print(f'Roczny zwrot: {results[idx, 0]:.4f}')
-        print(f'Zmienność: {results[idx, 1]:.4f}')
-        print('Wagi portfela:')
-        for ticker, weight in zip(assets, weights):
-            print(f'{ticker}: {weight:.2%}')
+        if i == 0: 
+            continue
+        else:
+            idx = sorted_indices[i]
+            weights = weights_record[idx]
+            print(f'\nPortfel {i + 1}:')
+            print(f'Roczny zwrot: {results[idx, 0]:.4f}')
+            print(f'Zmienność: {results[idx, 1]:.4f}')
+            print('Wagi portfela:')
+            for ticker, weight in zip(assets, weights):
+                print(f'{ticker}: {weight:.2%}')
 
     # Wyświetlenie portfela o maksymalnym zwrocie
     #print(f'\nPortfel o maksymalnym rocznym zwrocie:')
@@ -140,7 +144,10 @@ selected_portfolios = []
 print("\nWybierz portfel, który chcesz zaadoptować (1-5):")
 for i in range(top_n):
     idx = sorted_indices[i]
-    print(f'{i + 1}. Portfel {i + 1}: Roczny zwrot: {results[idx, 0]:.4f}, Zmienność: {results[idx, 1]:.4f}')
+    if i == 0:
+        print(f"{i + 1}. Portfel {i + 1} (Sharpe'a): Roczny zwrot: {results[idx, 0]:.4f}, Zmienność: {results[idx, 1]:.4f}")
+    else:
+        print(f"{i + 1}. Portfel {i + 1}: Roczny zwrot: {results[idx, 0]:.4f}, Zmienność: {results[idx, 1]:.4f}")
 
 user_choice = int(input("Wprowadź numer portfela (1-5): ")) - 1
 if user_choice < 0 or user_choice >= top_n:
