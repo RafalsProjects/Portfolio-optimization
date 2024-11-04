@@ -37,7 +37,7 @@ def fetch_data(assets, start_date, end_date):
     return returns
 
 # Funkcja do optymalizacji portfela
-def optimize_portfolio(assets, start_date, end_date, num_portfolios=50000, risk_free_rate=0):
+def optimize_portfolio(assets, start_date, end_date, num_portfolios=100000, risk_free_rate=0):
     returns = fetch_data(assets, start_date, end_date)
 
     if returns.empty:
@@ -67,17 +67,17 @@ def optimize_portfolio(assets, start_date, end_date, num_portfolios=50000, risk_
     return results, weights_record
 
 # Parametry do optymalizacji
-# assets = ['SOL-USD', 'SUI20947-USD', 'TAO22974-USD', 'RUNE-USD', 'AAVE-USD', 'PEPE24478-USD', 'FET-USD', 'WIF-USD', 'BONK-USD', 'PENDLE-USD']
+assets = ['SOL-USD', 'SUI20947-USD', 'TAO22974-USD', 'RUNE-USD', 'AAVE-USD', 'PEPE24478-USD', 'FET-USD', 'WIF-USD', 'BONK-USD', 'PENDLE-USD']
 # assets = ['OM-USD', 'CPOOL-USD', 'RIO-USD', 'ONDO-USD']
 # assets = ['ACX22620-USD', 'BANANA28066-USD']
 # assets = ['PAAL-USD', 'BTC-USD']
-assets = ['BTC-USD', 'MUBI-USD', 'ORDI-USD', '1000SATS-USD', 'SOV-USD', 'SAVM-USD', 'TRAC25208-USD', 'DOG30933-USD', 'ORNJ-USD']
+# assets = ['BTC-USD', 'MUBI-USD', 'ORDI-USD', '1000SATS-USD', 'SOV-USD', 'SAVM-USD', 'TRAC25208-USD', 'DOG30933-USD', 'ORNJ-USD']
 # assets = ['TON11419-USD', 'DOGS32698-USD', 'NOT-USD']
 end_date = datetime.now().strftime('%Y-%m-%d')
 
 # Okresy do analizy (w dniach)
 # periods = [3, 7, 30, 90]  # 3 dni, 7 dni, 30 dni, 90 dni
-periods = [30]
+periods = [60] # 60 and 90 it's optimal
 results_all_periods = {}
 
 for period in periods:
