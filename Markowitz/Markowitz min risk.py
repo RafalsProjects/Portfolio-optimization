@@ -3,6 +3,8 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
+from datetime import datetime
+
 
 # Funkcja do pobierania danych historycznych o cenach
 def get_price_data(tickers, start_date, end_date):
@@ -41,9 +43,9 @@ def optimize_portfolio(tickers, mean_returns, cov_matrix):
 # Główna funkcja
 def main():
     tickers = ['SOL-USD', 'SUI20947-USD', 'TAO22974-USD', 'RUNE-USD', 'AAVE-USD', 'PEPE24478-USD', 'FET-USD', 'WIF-USD', 'BONK-USD', 'PENDLE-USD', 'KAS-USD']  # Wprowadź swoje tickery
-    start_date = '2024-06-01'
-    end_date = '2024-10-01'
-
+    start_date = '2024-08-01'
+    end_date = datetime.now().strftime('%Y-%m-%d')
+    
     # Pobieranie danych
     price_data = get_price_data(tickers, start_date, end_date)
     
