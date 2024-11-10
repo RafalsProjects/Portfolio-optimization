@@ -40,7 +40,7 @@ def optimize_portfolio(tickers, mean_returns, cov_matrix):
 
 # Główna funkcja
 def main():
-    tickers = ['BTC-USD', 'ETH-USD', 'TON11419-USD', 'SOL-USD', 'SUI20947-USD', 'TAO22974-USD', 'NEAR-USD']  # Wprowadź swoje tickery
+    tickers = ['SOL-USD', 'SUI20947-USD', 'TAO22974-USD', 'RUNE-USD', 'AAVE-USD', 'PEPE24478-USD', 'FET-USD', 'WIF-USD', 'BONK-USD', 'PENDLE-USD', 'KAS-USD']  # Wprowadź swoje tickery
     start_date = '2024-06-01'
     end_date = '2024-10-01'
 
