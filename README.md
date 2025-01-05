@@ -20,7 +20,7 @@ Markowitz theory assumes that investors are rational and risk averse.
 #### Patterns in Markowitz theory
 1. the expected rate of return of a portfolio
 
-E(Rp) = Σ(wi * E(Ri))
+$E(Rp) = Σ(wi * E(Ri))$
 
 Where:
 E(Rp): The expected rate of return of the portfolio,
@@ -36,7 +36,7 @@ Where:
 wi, wj: Weights of assets i and j,
 σij: Covariance between assets i and j.
 
-3 Effective frontier
+3. Effective frontier
 The efficient frontier is the set of portfolios that maximise return at a given level of risk or minimise risk at a given level of return. The formula for the optimal asset weights for a portfolio:
 
 W = (Σ-¹ * (R - Rf * 1)) / (1' * Σ-¹ * (R - Rf * 1))
